@@ -62,7 +62,7 @@ public:
         double sellingPrice = initialPrice;
         for (int i = 0; i < NUM_YEARS; ++i) {
             if (rates[i].year > purchaseYear && rates[i].year <= sellingYear) {
-                double growthFactor = (1 + ((rates[i].growth_price - rates[i].in_rate) / 100.0));
+                double growthFactor = (1 + ((rates[i].growth_price) / 100.0));
                 sellingPrice *= growthFactor;
             }
         }
@@ -71,7 +71,7 @@ public:
 
     double calculateLTCG(double sellingPrice) {
         double gain = sellingPrice - initialPrice;
-        return gain > 0 ? 0.20 * gain : 0; // 20% tax on the gain
+        return gain > 0 ? 0.125 * gain : 0; // 20% tax on the gain
     }
 };
 
