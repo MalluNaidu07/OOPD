@@ -69,26 +69,14 @@ public:
         return sellingPrice;
     }
 
-     double calculateSellingPriceOldMethod(const Data rates[]) {
-        double sellingPrice = initialPrice;
-        for (int i = 0; i < NUM_YEARS; ++i) {
-            if (rates[i].year > purchaseYear && rates[i].year <= sellingYear) {
-                double growthFactor = (1 + ((rates[i].growth_price - rates[i].in_rate) / 100.0));
-                sellingPrice *= growthFactor;
-            }
-        }
-        return sellingPrice;
-    }
+    
 
     double calculateLTCG(double sellingPrice) {
         double gain = sellingPrice - initialPrice;
         return gain > 0 ? 1.25 * gain : 0; // 20% tax on the gain
     }
 
-     double calculateLTCGoldMethod(double sellingPrice) {
-        double gain = sellingPrice - initialPrice;
-        return gain > 0 ? 0.20 * gain : 0; // 20% tax on the gain
-    }
+    
 };
 
 int main() {
@@ -115,22 +103,7 @@ int main() {
     cout << "Estimated Selling Price: Rs " << sellingPrice << " lakhs" << endl;
     cout << "Long-term Capital Gains Tax (LTCG): Rs " << LTCG << " lakhs" << endl;
 
-    double sellingPriceOld = taxCalculator.calculateSellingPriceOldMethod(inflationRate.rates);
-    double LTCGOld = taxCalculator.calculateLTCGoldMethod(sellingPriceOld);
-
-    cout<<"Old SP: "<<sellingPriceOld<<endl; //printing the old selling price for clarity
-    cout<<"Old LTCG: "<<LTCGOld<<endl;           // printing the new LTCG 
-
-    double difference = LTCGOld-LTCG;  //Finding the difference between old and new ltcg
-    if(difference > 0){
-        cout<<"Old Scheme is better by the difference rate of "<<difference<<endl;  //if difference is more old is better otherwise new
-    }
-    else if(difference < 0){
-        cout<<"New Scheme is better by the difference rate of "<<(-difference)<<endl;
-    }
-    else{
-        cout<<"Both provides the same tax rate"<<endl;
-    }
+    
 
     return 0;
 }
