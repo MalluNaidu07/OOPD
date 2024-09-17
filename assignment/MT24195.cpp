@@ -73,7 +73,7 @@ public:
 
     double calculateLTCG(double sellingPrice) {
         double gain = sellingPrice - initialPrice;
-        return gain > 0 ? 1.25 * gain : 0; // 20% tax on the gain
+        return gain > 0 ? 0.20 * gain : 0; // 20% tax on the gain
     }
 
     
